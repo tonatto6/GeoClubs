@@ -1,4 +1,5 @@
 using GeoClubs.IoC;
+using Jose;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -27,6 +28,9 @@ builder.Services.AddCors(options =>
                 .SetIsOriginAllowed(_ => true);
         });
 });
+
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("JwtSettings"));
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //    .AddJwtBearer(options =>

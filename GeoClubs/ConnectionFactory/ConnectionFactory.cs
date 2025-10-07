@@ -1,11 +1,12 @@
-﻿using System.Data.SqlClient;
+﻿using GeoClubs.Helpers;
+using Microsoft.Extensions.Options;
+using System.Data.SqlClient;
 
 namespace GeoClubs.ConnectionFactory
 {
     public static class ConnectionFactory
     {
-        private static string connectionString = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;Database=Clubs;";
-
+        private static string connectionString = GetConfigSection.GetConfigValue("databaseConnection").Value;
         public static SqlConnection GetConnection
         {
             get
