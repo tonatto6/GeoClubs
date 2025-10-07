@@ -11,5 +11,10 @@ namespace GeoClubs.Services
         {
             this.clubsRepository = clubsRepository;
         }
+
+        public async Task<dynamic> SeekAll(decimal latitude, decimal longitude, decimal? metersDistance, string? filter)
+        {
+            return await clubsRepository.SeekAll(latitude, longitude, metersDistance, filter);
+        }
     }
 }
