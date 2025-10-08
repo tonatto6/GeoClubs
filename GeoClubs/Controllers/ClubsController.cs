@@ -21,7 +21,7 @@ namespace GeoClubs.Controllers
         }
 
         [HttpGet("coordinates")]
-        public async Task<IActionResult> getWithCoordinates([FromQuery] decimal latitude
+        public async Task<IActionResult> getWithCoordinates([FromQuery, Required] decimal latitude
             , [FromQuery,Required] decimal longitude
             , [FromQuery, Required] decimal? metersDistance
             , [FromQuery] string? filter)
