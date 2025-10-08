@@ -5,6 +5,7 @@ using GeoClubs.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace GeoClubs.Controllers
 {
@@ -21,8 +22,8 @@ namespace GeoClubs.Controllers
 
         [HttpGet("coordinates")]
         public async Task<IActionResult> getWithCoordinates([FromQuery] decimal latitude
-            , [FromQuery] decimal longitude
-            , [FromQuery] decimal? metersDistance
+            , [FromQuery,Required] decimal longitude
+            , [FromQuery, Required] decimal? metersDistance
             , [FromQuery] string? filter)
         {
             try
@@ -38,7 +39,7 @@ namespace GeoClubs.Controllers
         }
 
         [HttpGet("address")]
-        public async Task<IActionResult> getWithAddress([FromQuery] string address
+        public async Task<IActionResult> getWithAddress([FromQuery, Required] string address
             , [FromQuery] decimal? metersDistance
             , [FromQuery] string? filter)
         {

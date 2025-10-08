@@ -30,7 +30,7 @@ namespace GeoClubs.Services
             var url = $"search?format=json&q={Uri.EscapeDataString(address)}";
             var response = await _httpClient.GetAsync(url);
 
-            if (!response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode) 
                 return null;
 
             var contenido = await response.Content.ReadFromJsonAsync<List<Coordinates>>();

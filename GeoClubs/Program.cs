@@ -11,7 +11,7 @@ builder.Services.AddDependency(builder.Configuration);
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Users Application" });
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Geolocate Clubs" });
 });
 
 builder.Services.AddControllers();
@@ -28,25 +28,6 @@ builder.Services.AddCors(options =>
                 .SetIsOriginAllowed(_ => true);
         });
 });
-
-builder.Services.Configure<JwtSettings>(
-    builder.Configuration.GetSection("JwtSettings"));
-
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = false,
-//            ValidateAudience = false,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("usersapplicationrepo202502102025"))
-//        };
-//    });
-
-
-//builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
