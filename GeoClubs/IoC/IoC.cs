@@ -12,6 +12,8 @@ namespace GeoClubs.IoC
             services.AddScoped<IClubsRepository, ClubsRepository>();
             services.AddScoped<IClubsServices, ClubsServices>();
 
+            services.AddScoped<HttpClient>();
+
             return services;
         }
     }

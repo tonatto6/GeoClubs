@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeoClubs.Controllers
 {
-    [Route("api/clubs")]
+    [Route("api/geoClubs")]
     [ApiController]
     public class ClubsController : ControllerBase
     {
@@ -19,15 +19,32 @@ namespace GeoClubs.Controllers
             this.clubsServices = clubsServices;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> SeekAll([FromQuery] decimal latitude
+        [HttpGet("coordinates")]
+        public async Task<IActionResult> getWithCoordinates([FromQuery] decimal latitude
             , [FromQuery] decimal longitude
             , [FromQuery] decimal? metersDistance
             , [FromQuery] string? filter)
         {
             try
             {
-                var result = await clubsServices.SeekAll(latitude,longitude,metersDistance,filter);
+                var result = await clubsServices.getWithCoordinates(latitude,longitude,metersDistance,filter);
+
+                return Ok(result);
+            }
+            catch (CustomException ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpGet("address")]
+        public async Task<IActionResult> getWithAddress([FromQuery] string address
+            , [FromQuery] decimal? metersDistance
+            , [FromQuery] string? filter)
+        {
+            try
+            {
+                var result = await clubsServices.getWithAddress(address, metersDistance, filter);
 
                 return Ok(result);
             }

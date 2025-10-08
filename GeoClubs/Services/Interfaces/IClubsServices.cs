@@ -2,6 +2,7 @@
 {
     public interface IClubsServices
     {
-        Task<dynamic> SeekAll(decimal latitude, decimal longitude, decimal? metersDistance, string? filter);
+        Task<dynamic> getWithCoordinates(decimal latitude, decimal longitude, decimal? metersDistance, string? filter);
+        Task<dynamic> getWithAddress(string address, decimal? metersDistance, string? filter);
     }
 }
