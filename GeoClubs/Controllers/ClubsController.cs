@@ -20,6 +20,21 @@ namespace GeoClubs.Controllers
             this.clubsServices = clubsServices;
         }
 
+        [HttpGet("{idClub}")]
+        public async Task<IActionResult> Seek(int idClub)
+        {
+            try
+            {
+                var result = await clubsServices.Seek(idClub);
+
+                return Ok(result);
+            }
+            catch (CustomException ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> SeekAll([FromQuery] int pageNumber
             , [FromQuery] int? rowsPages

@@ -8,6 +8,29 @@ namespace GeoClubs.Repositories
 {
     public class ClubsRepository : IClubsRepository
     {
+        public async Task<dynamic> Seek(int idClub)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@IdClub", idClub, DbType.Int32, ParameterDirection.Input);
+
+                using (var conexion = ConnectionFactory.ConnectionFactory.GetConnection)
+                {
+                    return await conexion.QueryAsync<dynamic>("usp_Clubs_Seek",
+                                                parameters, null, null, CommandType.StoredProcedure);
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                throw new CustomException(sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(422, ex.Message);
+            }
+        }
+
         public async Task<dynamic> SeekAll(int? pageNumber, int? rowsPages, string? filter)
         {
             try

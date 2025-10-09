@@ -48,5 +48,10 @@ namespace GeoClubs.Services
         {
             return await clubsRepository.SeekAll(pageNumber, rowsPages, filter);
         }
+
+        public async Task<dynamic> Seek(int idClub)
+        {
+            return await clubsRepository.Seek(idClub);
+        }
     }
 }
