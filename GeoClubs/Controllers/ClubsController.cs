@@ -20,6 +20,23 @@ namespace GeoClubs.Controllers
             this.clubsServices = clubsServices;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SeekAll([FromQuery] int pageNumber
+            , [FromQuery] int? rowsPages
+            , [FromQuery] string? filter)
+        {
+            try
+            {
+                var result = await clubsServices.SeekAll(pageNumber, rowsPages, filter);
+
+                return Ok(result);
+            }
+            catch (CustomException ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpGet("coordinates")]
         public async Task<IActionResult> getWithCoordinates([FromQuery, Required] decimal latitude
             , [FromQuery,Required] decimal longitude

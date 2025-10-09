@@ -22,7 +22,7 @@ namespace GeoClubs.Services
 
         public async Task<dynamic> getWithCoordinates(decimal latitude, decimal longitude, decimal? metersDistance, string? filter)
         {
-            return await clubsRepository.SeekAll(latitude, longitude, metersDistance, filter);
+            return await clubsRepository.SeekAllCoordinates(latitude, longitude, metersDistance, filter);
         }
 
         public async Task<dynamic> getWithAddress(string address, decimal? metersDistance, string? filter)
@@ -41,7 +41,12 @@ namespace GeoClubs.Services
             var latitude = Convert.ToDecimal(contenido[0].Lat, System.Globalization.CultureInfo.InvariantCulture);
             var longitude = Convert.ToDecimal(contenido[0].Lon, System.Globalization.CultureInfo.InvariantCulture);
 
-            return await clubsRepository.SeekAll(latitude, longitude, metersDistance, filter);
+            return await clubsRepository.SeekAllCoordinates(latitude, longitude, metersDistance, filter);
+        }
+
+        public async Task<dynamic> SeekAll(int? pageNumber, int? rowsPages, string? filter)
+        {
+            return await clubsRepository.SeekAll(pageNumber, rowsPages, filter);
         }
     }
 }

@@ -8,7 +8,32 @@ namespace GeoClubs.Repositories
 {
     public class ClubsRepository : IClubsRepository
     {
-        public async Task<dynamic> SeekAll(decimal latitude,decimal longitude,decimal? metersDistance,string? filter)
+        public async Task<dynamic> SeekAll(int? pageNumber, int? rowsPages, string? filter)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@PageNumber", pageNumber, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@RowsPage", rowsPages, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@Filter", filter, DbType.String, ParameterDirection.Input);
+
+                using (var conexion = ConnectionFactory.ConnectionFactory.GetConnection)
+                {
+                    return await conexion.QueryAsync<dynamic>("usp_Clubs_Seek_All",
+                                                parameters, null, null, CommandType.StoredProcedure);
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                throw new CustomException(sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(422, ex.Message);
+            }
+        }
+
+        public async Task<dynamic> SeekAllCoordinates(decimal latitude,decimal longitude,decimal? metersDistance,string? filter)
         {
             try
             {

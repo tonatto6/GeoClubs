@@ -2,6 +2,7 @@
 {
     public interface IClubsRepository
     {
-        Task<dynamic> SeekAll(decimal latitude, decimal longitude, decimal? metersDistance, string? filter);
+        Task<dynamic> SeekAllCoordinates(decimal latitude, decimal longitude, decimal? metersDistance, string? filter);
+        Task<dynamic> SeekAll(int? pageNumber, int? rowsPages, string? filter);
     }
 }
